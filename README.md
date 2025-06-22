@@ -1,18 +1,14 @@
-## Getting Started
+# Java JSON Serializer
+This is a lightweight Java JSON serializer library that allows you to convert Java objects to JSON format. The library process and handles common Java types including primitives, collections, and custom objects.
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+## Features
+* Convert Java objects to JSON strings
+* Handling of null values
+* Support for Java collections (List, Map)
 
-## Folder Structure
-
-The workspace contains two folders by default, where:
-
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+## Planned Features
+* Parse JSON strings back to Java objects
+* Support for custom field naming via annotations
+* Support for Set
+* Date formatting options
+* Exclude fields from serialization
