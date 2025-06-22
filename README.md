@@ -1,5 +1,5 @@
 # Java JSON Serializer
-This is a lightweight Java JSON serializer library that allows you to convert Java objects to JSON format. The library process and handles common Java types including primitives, collections, and custom objects.
+This is a lightweight Java JSON serializer library that allows you to convert Java objects to JSON format using Java Reflections. The library process and handles common Java types including primitives, collections, and custom objects.
 
 ## Features
 * Convert Java objects to JSON strings
