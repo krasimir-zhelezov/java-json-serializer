@@ -1,18 +1,22 @@
 package dev.zhelezov.jsonserializer;
 
+import java.util.List;
+
 public class User {
     private String username;
     private String email;
     private String password;
     private boolean isAdmin;
     private int age;
+    private List<String> interests;
 
-    public User(int age, String email, boolean isAdmin, String password, String username) {
+    public User(int age, String email, boolean isAdmin, String password, String username, List<String> interests) {
         this.age = age;
         this.email = email;
         this.isAdmin = isAdmin;
         this.password = password;
         this.username = username;
+        this.interests = interests;
     }
 
     public String getUsername() {

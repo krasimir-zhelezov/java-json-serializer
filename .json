@@ -1,5 +1,10 @@
 {
-    "User": {
-        "asd": "asdad"
-    }
+"User": {
+"username": "username",
+"email": null,
+"password": "password",
+"isAdmin": true,
+"age": 1,
+"interests": [Hiking, Dancing, Programming]
+}
 }
