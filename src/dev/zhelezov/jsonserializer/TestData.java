@@ -9,8 +9,17 @@ public class TestData {
     private boolean isActive;
     private double salary;
     private List<String> hobbies;
-    // private Map<String, Integer> scores;
+    private Map<String, Integer> scores;
     private Address address;
+    private User[] users;
+    public User[] getUsers() {
+        return users;
+    }
+
+    public void setUsers(User[] users) {
+        this.users = users;
+    }
+
     private boolean[] binaryData;
     public boolean[] getBinaryData() {
         return binaryData;
@@ -68,8 +77,8 @@ public class TestData {
     public void setSalary(double salary) { this.salary = salary; }
     public List<String> getHobbies() { return hobbies; }
     public void setHobbies(List<String> hobbies) { this.hobbies = hobbies; }
-    // public Map<String, Integer> getScores() { return scores; }
-    // public void setScores(Map<String, Integer> scores) { this.scores = scores; }
+    public Map<String, Integer> getScores() { return scores; }
+    public void setScores(Map<String, Integer> scores) { this.scores = scores; }
     public Address getAddress() { return address; }
     public void setAddress(Address address) { this.address = address; }
     public String getTemporaryData() { return temporaryData; }

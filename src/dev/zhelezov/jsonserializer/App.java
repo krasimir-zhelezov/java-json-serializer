@@ -18,12 +18,17 @@ public class App {
         data.setActive(true);
         data.setSalary(75000.50);
         data.setHobbies(Arrays.asList("Reading", "Hiking", "Photography"));
+        data.setUsers(new User[] {
+            new User(1, null, true, "password", "username", new ArrayList<>(Arrays.asList("Hiking", "Dancing", "Programming"))),
+            new User(2, null, false, "password", "username", new ArrayList<>(Arrays.asList("Reading", "Dancing", "Programming"))),
+            new User(3, null, true, "password", "username", new ArrayList<>(Arrays.asList("Reading", "Hiking", "Programming")))
+        });
         
-        // Map<String, Integer> scores = new HashMap<>();
-        // scores.put("Math", 95);
-        // scores.put("Science", 88);
-        // scores.put("History", 92);
-        // data.setScores(scores);
+        Map<String, Integer> scores = new HashMap<>();
+        scores.put("Math", 95);
+        scores.put("Science", 88);
+        scores.put("History", 92);
+        data.setScores(scores);
         
         TestData.Address address = new TestData.Address();
         address.setStreet("123 Main St");
@@ -130,6 +135,21 @@ public class App {
                 }
             }
             sb.append("]");
+        } else if (obj instanceof Map) {
+            sb.append("{\n");
+
+            for (int i = 0; i < ((Map<?, ?>) obj).size(); i++) {
+                boolean isLastIteration = (i == ((Map<?, ?>) obj).size() - 1);
+                sb.append("\"");
+                sb.append(((Map<?, ?>) obj).keySet().toArray()[i]);
+                sb.append("\": ");
+                sb.append(serializeField(((Map<?, ?>) obj).values().toArray()[i]));
+                if (!isLastIteration) {
+                    sb.append(",");
+                }
+            }
+
+            sb.append("\n}");
         } else if (PRIMITIVE_WRAPPERS.contains(obj.getClass())) {
             sb.append(obj);
         } else {

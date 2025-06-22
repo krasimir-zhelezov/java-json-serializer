@@ -1,12 +1,37 @@
-{
-"name": "John Doe",
+{"name": "John Doe",
 "age": 30,
 "isActive": true,
 "salary": 75000.5,
 "hobbies": ["Reading","Hiking","Photography"],
+"scores": {
+"Science": 88,"Math": 95,"History": 92
+},
 "address": {
 "street": "123 Main St",
 "city": "Springfield",
 "zipCode": "12345"
-}
+},
+"users": [{
+"username": "username",
+"email": null,
+"password": "password",
+"isAdmin": true,
+"age": 1,
+"interests": ["Hiking","Dancing","Programming"]
+},{
+"username": "username",
+"email": null,
+"password": "password",
+"isAdmin": false,
+"age": 2,
+"interests": ["Reading","Dancing","Programming"]
+},{
+"username": "username",
+"email": null,
+"password": "password",
+"isAdmin": true,
+"age": 3,
+"interests": ["Reading","Hiking","Programming"]
+}],
+"binaryData": [true,true,false]
 }
