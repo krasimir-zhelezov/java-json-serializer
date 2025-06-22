@@ -1,10 +1,12 @@
 {
-"User": {
-"username": "username",
-"email": null,
-"password": "password",
-"isAdmin": true,
-"age": 1,
-"interests": [Hiking, Dancing, Programming]
+"name": "John Doe",
+"age": 30,
+"isActive": true,
+"salary": 75000.5,
+"hobbies": ["Reading","Hiking","Photography"],
+"address": {
+"street": "123 Main St",
+"city": "Springfield",
+"zipCode": "12345"
 }
 }

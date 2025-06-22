@@ -11,6 +11,15 @@ public class TestData {
     private List<String> hobbies;
     // private Map<String, Integer> scores;
     private Address address;
+    private boolean[] binaryData;
+    public boolean[] getBinaryData() {
+        return binaryData;
+    }
+
+    public void setBinaryData(boolean[] binaryData) {
+        this.binaryData = binaryData;
+    }
+
     private transient String temporaryData; // Should be ignored by serializer
     private static final String CLASS_VERSION = "1.0"; // Should be ignored
     
@@ -40,11 +49,12 @@ public class TestData {
     // Constructors
     public TestData() {}
     
-    public TestData(String name, int age, boolean isActive, double salary) {
+    public TestData(String name, int age, boolean isActive, double salary, boolean[] binaryData) {
         this.name = name;
         this.age = age;
         this.isActive = isActive;
         this.salary = salary;
+        this.binaryData = binaryData;
     }
     
     // Getters and setters

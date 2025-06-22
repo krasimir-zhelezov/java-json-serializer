@@ -30,6 +30,7 @@ public class App {
         address.setCity("Springfield");
         address.setZipCode("12345");
         data.setAddress(address);
+        data.setBinaryData(new boolean[] {true, true, false});
 
         System.out.println(serialize(data));
     }
@@ -50,12 +51,25 @@ public class App {
 
         sb.append("{\n");
 
-        Field fieldList[] = cls.getDeclaredFields();
+        Field fieldArray[] = cls.getDeclaredFields();
+        ArrayList<Field> fieldList = new ArrayList<Field>();
 
-        for (int i = 0; i < fieldList.length; i++) {
-            boolean isLastIteration = (i == fieldList.length - 1);
+        for (int i = 0; i < fieldArray.length; i++) {
+            if (Modifier.isTransient(fieldArray[i].getModifiers()) || Modifier.isFinal(fieldArray[i].getModifiers())) {
+                continue;
+            }
 
-            Field field = fieldList[i];
+            fieldList.add(fieldArray[i]);
+        }
+
+        for (int i = 0; i < fieldList.size(); i++) {
+            boolean isLastIteration = (i == fieldList.size() - 1);
+
+            Field field = fieldList.get(i);
+
+            if (Modifier.isTransient(field.getModifiers()) || Modifier.isFinal(field.getModifiers())) {
+                continue;
+            }
 
             field.setAccessible(true);
 
@@ -94,21 +108,29 @@ public class App {
             sb.append("\"");
         } else if (obj instanceof Collection) {
             sb.append("[");
-            if (obj instanceof List) {
-                List<?> list = (List<?>) obj;
-                for (int i = 0; i < ((Collection<?>) obj).size(); i++) {
-                    boolean isLastIteration = (i == ((Collection<?>) obj).size() - 1);
-                    sb.append(serializeField(list.get(i)));
+            List<?> list = (List<?>) obj;
+            for (int i = 0; i < ((Collection<?>) obj).size(); i++) {
+                boolean isLastIteration = (i == ((Collection<?>) obj).size() - 1);
+                sb.append(serializeField(list.get(i)));
 
-                    if (!isLastIteration) {
-                        sb.append(",");
-                    }
+                if (!isLastIteration) {
+                    sb.append(",");
                 }
-                sb.append("]");
             }
+            sb.append("]");
             
+        } else if (obj.getClass().isArray()) {
+            sb.append("[");
+            int length = Array.getLength(obj);
+            for (int i = 0; i < length; i++) {
+                Object element = Array.get(obj, i);
+                sb.append(serializeField(element));
+                if (i != length - 1) {
+                    sb.append(",");
+                }
+            }
+            sb.append("]");
         } else if (PRIMITIVE_WRAPPERS.contains(obj.getClass())) {
-            System.out.println("Primitive");
             sb.append(obj);
         } else {
             sb.append(serialize(obj));
