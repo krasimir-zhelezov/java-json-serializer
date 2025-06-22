@@ -1,3 +1,5 @@
+package dev.zhelezov.jsonserializer;
+
 public class User {
     private String username;
     private String email;
