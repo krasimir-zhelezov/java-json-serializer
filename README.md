@@ -4,11 +4,11 @@ This is a lightweight Java JSON serializer library that allows you to convert Ja
 ## Features
 * Convert Java objects to JSON strings
 * Handling of null values
-* Support for Java collections (List, Map)
+* Support for Java collections (List, Map, Set)
 
 ## Planned Features
 * FIX SPAGHETTI CODE
-* Support for Set
+* ~~Support for Set~~
 * Annotations
 * Save to .json
 * Parse JSON strings back to Java objects
