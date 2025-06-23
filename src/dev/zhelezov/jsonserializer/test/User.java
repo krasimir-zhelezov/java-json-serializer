@@ -3,13 +3,14 @@ package dev.zhelezov.jsonserializer.test;
 import java.util.List;
 
 import dev.zhelezov.jsonserializer.annotations.JsonExclude;
+import dev.zhelezov.jsonserializer.annotations.JsonProperty;
 
 public class User {
-    private String username;
+    @JsonProperty("UserName") private String username;
     private String email;
     @JsonExclude private String password;
     private boolean isAdmin;
-    private int age;
+    @JsonProperty("UserAge") private int age;
     @JsonExclude private List<String> interests;
 
     public User(int age, String email, boolean isAdmin, String password, String username, List<String> interests) {

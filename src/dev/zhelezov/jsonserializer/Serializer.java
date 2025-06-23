@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Set;
 
 import dev.zhelezov.jsonserializer.annotations.JsonExclude;
+import dev.zhelezov.jsonserializer.annotations.JsonProperty;
 
 public class Serializer {
     private static final Set<Class<?>> PRIMITIVE_WRAPPERS = Set.of(
@@ -49,7 +50,7 @@ public class Serializer {
             field.setAccessible(true);
 
             sb.append("\"");
-            sb.append(field.getName());
+            sb.append(field.isAnnotationPresent(JsonProperty.class) ? field.getAnnotation(JsonProperty.class).value() : field.getName());
             sb.append("\": ");
 
             Object fieldValue = field.get(obj);
