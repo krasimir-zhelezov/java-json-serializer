@@ -17,12 +17,28 @@ import java.util.Set;
 import dev.zhelezov.jsonserializer.main.annotations.JsonExclude;
 import dev.zhelezov.jsonserializer.main.annotations.JsonProperty;
 
+/**
+ * Custom Java JSON serializer.
+ * 
+ * @author Krasimir Zhelezov
+ * @version 1.0.0
+ * @since 1.0.0
+ */
+
 public class Serializer {
     private static final Set<Class<?>> PRIMITIVE_WRAPPERS = Set.of(
         Integer.class, Long.class, Double.class, Float.class,
         Boolean.class, Character.class, Byte.class, Short.class, Void.class
     );
 
+    /**
+     * Generate a JSON file in the specified path with the serialized object.
+     * 
+     * @param filePath The path where to save the JSON file.
+     * @param obj      The object to serialize.
+     * @throws IllegalArgumentException If the object is <code>null</code>.
+     * @throws IllegalAccessException   If the object has fields that are not accessible.
+     */
     public static void generateJsonFile(String filePath, Object obj) throws IllegalArgumentException, IllegalAccessException {
         String json = serialize(obj);
 
@@ -34,6 +50,14 @@ public class Serializer {
         }
     }
 
+    /**
+     * Serialize the specified object into a JSON string.
+     * 
+     * @param obj The object to serialize.
+     * @return A JSON string representing the object.
+     * @throws IllegalArgumentException If the object is <code>null</code>.
+     * @throws IllegalAccessException   If the object has fields that are not accessible.
+     */
     public static String serialize(Object obj) throws IllegalArgumentException, IllegalAccessException {
         if (obj == null) return "null";
 
@@ -87,6 +111,15 @@ public class Serializer {
         return sb.toString();
     }
 
+    
+    /**
+     * Serialize a field into a JSON string.
+     * 
+     * @param obj The value of the field to serialize.
+     * @return A JSON string representing the value of the field.
+     * @throws IllegalArgumentException If the object is <code>null</code>.
+     * @throws IllegalAccessException   If the object has fields that are not accessible.
+     */
     private static String serializeField(Object obj) throws IllegalArgumentException, IllegalAccessException {
         if (obj == null) {
             return null;
