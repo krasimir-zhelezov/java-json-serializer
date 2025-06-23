@@ -14,6 +14,6 @@ This is a lightweight Java JSON serializer library that allows you to convert Ja
 * Circular Reference handler
 * Save to .json
 * Parse JSON strings back to Java objects
-* Support for custom field naming via annotations
+* ~~Support for custom field naming via annotations~~
 * Date formatting options
-* Exclude fields from serialization
+* ~~Exclude fields from serialization~~
