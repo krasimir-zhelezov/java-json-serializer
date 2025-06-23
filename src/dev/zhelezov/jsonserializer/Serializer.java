@@ -85,7 +85,7 @@ public class Serializer {
             List<?> list;
             
             if (obj instanceof Set) {
-                list = new ArrayList<>((Set) obj);
+                list = new ArrayList<>((Collection<?>) obj);
             } else {
                 list = (List<?>) obj;
             }
