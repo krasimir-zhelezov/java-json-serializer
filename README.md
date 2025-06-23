@@ -2,6 +2,7 @@
 This is a lightweight Java JSON serializer library that allows you to convert Java objects to JSON format using Java Reflections. The library process and handles common Java types including primitives, collections, and custom objects.
 
 ## Features
+* Annotations
 * Convert Java objects to JSON strings
 * Handling of null values
 * Support for Java collections (List, Map, Set)
@@ -9,7 +10,7 @@ This is a lightweight Java JSON serializer library that allows you to convert Ja
 ## Planned Features
 * FIX SPAGHETTI CODE
 * ~~Support for Set~~
-* Annotations
+* ~~Annotations~~
 * Circular Reference handler
 * Save to .json
 * Parse JSON strings back to Java objects
