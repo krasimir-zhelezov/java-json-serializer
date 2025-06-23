@@ -10,6 +10,7 @@ This is a lightweight Java JSON serializer library that allows you to convert Ja
 * FIX SPAGHETTI CODE
 * ~~Support for Set~~
 * Annotations
+* Circular Reference handler
 * Save to .json
 * Parse JSON strings back to Java objects
 * Support for custom field naming via annotations
