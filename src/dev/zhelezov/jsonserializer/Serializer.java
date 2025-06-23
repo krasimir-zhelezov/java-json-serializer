@@ -1,8 +1,12 @@
 package dev.zhelezov.jsonserializer;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -17,6 +21,17 @@ public class Serializer {
         Integer.class, Long.class, Double.class, Float.class,
         Boolean.class, Character.class, Byte.class, Short.class, Void.class
     );
+
+    public static void generateJsonFile(String filePath, Object obj) throws IllegalArgumentException, IllegalAccessException {
+        String json = serialize(obj);
+
+        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filePath))) {
+            writer.write(json);
+            writer.newLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static String serialize(Object obj) throws IllegalArgumentException, IllegalAccessException {
         if (obj == null) return "null";
@@ -71,7 +86,7 @@ public class Serializer {
         return sb.toString();
     }
 
-    public static String serializeField(Object obj) throws IllegalArgumentException, IllegalAccessException {
+    private static String serializeField(Object obj) throws IllegalArgumentException, IllegalAccessException {
         if (obj == null) {
             return null;
         }

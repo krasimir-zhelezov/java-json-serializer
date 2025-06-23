@@ -40,6 +40,7 @@ public class App {
         TestClass data2 = new TestClass();
         data2.populateTestData();
 
-        System.out.println(Serializer.serialize(user));
+        //System.out.println(Serializer.serialize(user));
+        Serializer.generateJsonFile("user.json", user);
     }
 }
