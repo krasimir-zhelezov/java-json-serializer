@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import dev.zhelezov.jsonserializer.annotations.JsonExclude;
+
 public class Serializer {
     private static final Set<Class<?>> PRIMITIVE_WRAPPERS = Set.of(
         Integer.class, Long.class, Double.class, Float.class,
@@ -28,7 +30,7 @@ public class Serializer {
         ArrayList<Field> fieldList = new ArrayList<Field>();
 
         for (int i = 0; i < fieldArray.length; i++) {
-            if (Modifier.isTransient(fieldArray[i].getModifiers()) || Modifier.isFinal(fieldArray[i].getModifiers())) {
+            if (Modifier.isTransient(fieldArray[i].getModifiers()) || Modifier.isFinal(fieldArray[i].getModifiers()) || fieldArray[i].isAnnotationPresent(JsonExclude.class)) {
                 continue;
             }
 

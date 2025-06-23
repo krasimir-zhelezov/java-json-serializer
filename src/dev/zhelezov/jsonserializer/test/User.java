@@ -2,13 +2,15 @@ package dev.zhelezov.jsonserializer.test;
 
 import java.util.List;
 
+import dev.zhelezov.jsonserializer.annotations.JsonExclude;
+
 public class User {
     private String username;
     private String email;
-    private String password;
+    @JsonExclude private String password;
     private boolean isAdmin;
     private int age;
-    private List<String> interests;
+    @JsonExclude private List<String> interests;
 
     public User(int age, String email, boolean isAdmin, String password, String username, List<String> interests) {
         this.age = age;

@@ -11,7 +11,7 @@ import dev.zhelezov.jsonserializer.test.User;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        // User user = new User(1, null, true, "password", "username", new ArrayList<>(Arrays.asList("Hiking", "Dancing", "Programming")));
+        User user = new User(1, null, true, "password", "username", new ArrayList<>(Arrays.asList("Hiking", "Dancing", "Programming")));
         TestData data = new TestData();
         data.setName("John Doe");
         data.setAge(30);
@@ -40,6 +40,6 @@ public class App {
         TestClass data2 = new TestClass();
         data2.populateTestData();
 
-        System.out.println(Serializer.serialize(data));
+        System.out.println(Serializer.serialize(user));
     }
 }
