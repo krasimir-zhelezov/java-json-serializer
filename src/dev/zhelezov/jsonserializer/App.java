@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -12,30 +13,36 @@ import java.util.Set;
 public class App {
     public static void main(String[] args) throws Exception {
         // User user = new User(1, null, true, "password", "username", new ArrayList<>(Arrays.asList("Hiking", "Dancing", "Programming")));
-        TestData data = new TestData();
-        data.setName("John Doe");
-        data.setAge(30);
-        data.setActive(true);
-        data.setSalary(75000.50);
-        data.setHobbies(Arrays.asList("Reading", "Hiking", "Photography"));
-        data.setUsers(new User[] {
-            new User(1, null, true, "password", "username", new ArrayList<>(Arrays.asList("Hiking", "Dancing", "Programming"))),
-            new User(2, null, false, "password", "username", new ArrayList<>(Arrays.asList("Reading", "Dancing", "Programming"))),
-            new User(3, null, true, "password", "username", new ArrayList<>(Arrays.asList("Reading", "Hiking", "Programming")))
-        });
+        // TestData data = new TestData();
+        // data.setName("John Doe");
+        // data.setAge(30);
+        // data.setActive(true);
+        // data.setSalary(75000.50);
+        // data.setHobbies(Arrays.asList("Reading", "Hiking", "Photography"));
+        // data.setUsers(new User[] {
+        //     new User(1, null, true, "password", "username", new ArrayList<>(Arrays.asList("Hiking", "Dancing", "Programming"))),
+        //     new User(2, null, false, "password", "username", new ArrayList<>(Arrays.asList("Reading", "Dancing", "Programming"))),
+        //     new User(3, null, true, "password", "username", new ArrayList<>(Arrays.asList("Reading", "Hiking", "Programming")))
+        // });
         
-        Map<String, Integer> scores = new HashMap<>();
-        scores.put("Math", 95);
-        scores.put("Science", 88);
-        scores.put("History", 92);
-        data.setScores(scores);
+        // Map<String, Integer> scores = new HashMap<>();
+        // scores.put("Math", 95);
+        // scores.put("Science", 88);
+        // scores.put("History", 92);
+        // data.setScores(scores);
         
-        TestData.Address address = new TestData.Address();
-        address.setStreet("123 Main St");
-        address.setCity("Springfield");
-        address.setZipCode("12345");
-        data.setAddress(address);
-        data.setBinaryData(new boolean[] {true, true, false});
+        // TestData.Address address = new TestData.Address();
+        // address.setStreet("123 Main St");
+        // address.setCity("Springfield");
+        // address.setZipCode("12345");
+        // data.setAddress(address);
+        // data.setBinaryData(new boolean[] {true, true, false});
+
+        // Set<String> set = Set.of("A", "B", "C");
+        // TestDataSet data = new TestDataSet(set);
+
+        TestClass data = new TestClass();
+        data.populateTestData();
 
         System.out.println(serialize(data));
     }
@@ -113,7 +120,14 @@ public class App {
             sb.append("\"");
         } else if (obj instanceof Collection) {
             sb.append("[");
-            List<?> list = (List<?>) obj;
+
+            List<?> list;
+            
+            if (obj instanceof Set) {
+                list = new ArrayList<>((Set) obj);
+            } else {
+                list = (List<?>) obj;
+            }
             for (int i = 0; i < ((Collection<?>) obj).size(); i++) {
                 boolean isLastIteration = (i == ((Collection<?>) obj).size() - 1);
                 sb.append(serializeField(list.get(i)));
