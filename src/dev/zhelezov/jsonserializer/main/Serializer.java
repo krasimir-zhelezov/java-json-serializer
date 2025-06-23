@@ -1,4 +1,4 @@
-package dev.zhelezov.jsonserializer;
+package dev.zhelezov.jsonserializer.main;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import dev.zhelezov.jsonserializer.annotations.JsonExclude;
-import dev.zhelezov.jsonserializer.annotations.JsonProperty;
+import dev.zhelezov.jsonserializer.main.annotations.JsonExclude;
+import dev.zhelezov.jsonserializer.main.annotations.JsonProperty;
 
 public class Serializer {
     private static final Set<Class<?>> PRIMITIVE_WRAPPERS = Set.of(

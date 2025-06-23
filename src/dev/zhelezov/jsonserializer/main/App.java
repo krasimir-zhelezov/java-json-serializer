@@ -1,4 +1,4 @@
-package dev.zhelezov.jsonserializer;
+package dev.zhelezov.jsonserializer.main;
 
 import java.util.ArrayList;
 import java.util.Arrays;
