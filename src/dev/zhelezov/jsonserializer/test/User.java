@@ -1,5 +1,6 @@
 package dev.zhelezov.jsonserializer.test;
 
+import java.util.Date;
 import java.util.List;
 
 import dev.zhelezov.jsonserializer.annotations.JsonExclude;
@@ -12,14 +13,24 @@ public class User {
     private boolean isAdmin;
     @JsonProperty("UserAge") private int age;
     @JsonExclude private List<String> interests;
+    private Date dateJoined;
 
-    public User(int age, String email, boolean isAdmin, String password, String username, List<String> interests) {
+    public Date getDateJoined() {
+        return dateJoined;
+    }
+
+    public void setDateJoined(Date dateJoined) {
+        this.dateJoined = dateJoined;
+    }
+
+    public User(int age, String email, boolean isAdmin, String password, String username, List<String> interests, Date dateJoined) {
         this.age = age;
         this.email = email;
         this.isAdmin = isAdmin;
         this.password = password;
         this.username = username;
         this.interests = interests;
+        this.dateJoined = dateJoined;
     }
 
     public String getUsername() {
