@@ -18,3 +18,8 @@ This is a lightweight Java JSON serializer library that allows you to convert Ja
 * ~~Support for custom field naming via annotations~~
 * Date formatting options
 * ~~Exclude fields from serialization~~
+
+## Installation
+1. Download .jar from latest release
+2. Add the jar into external libraries
+3. Use
