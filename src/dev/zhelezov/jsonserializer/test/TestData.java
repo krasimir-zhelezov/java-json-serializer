@@ -1,4 +1,4 @@
-package dev.zhelezov.jsonserializer;
+package dev.zhelezov.jsonserializer.test;
 
 import java.util.List;
 import java.util.Map;

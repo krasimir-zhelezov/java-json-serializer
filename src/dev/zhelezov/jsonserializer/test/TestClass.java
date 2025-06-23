@@ -1,4 +1,4 @@
-package dev.zhelezov.jsonserializer;
+package dev.zhelezov.jsonserializer.test;
 
 import java.util.*;
 import java.time.LocalDate;
@@ -65,11 +65,11 @@ public class TestClass {
     }
 
     // Enum
-    public enum Status {
-        ACTIVE, INACTIVE, PENDING, DELETED
-    }
+    // public enum Status {
+    //     ACTIVE, INACTIVE, PENDING, DELETED
+    // }
 
-    private Status currentStatus;
+    // private Status currentStatus;
 
     // Constructor
     public TestClass() {
@@ -93,7 +93,7 @@ public class TestClass {
         this.active = true;
         this.price = 19.99;
         this.createdDate = LocalDate.now();
-        this.currentStatus = Status.ACTIVE;
+        //this.currentStatus = Status.ACTIVE;
 
         // Collections
         this.tags = Arrays.asList("important", "test", "json");
