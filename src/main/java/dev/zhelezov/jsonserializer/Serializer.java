@@ -129,6 +129,7 @@ public class Serializer {
         if (visitedObjects.contains(obj)) {
             throw new CircularReferenceException();
         }
+
         if (obj == null) {
             return null;
         }
@@ -138,65 +139,73 @@ public class Serializer {
         StringBuilder sb = new StringBuilder();
 
         if (obj instanceof String) {
-            sb.append("\"");
-            sb.append(obj);
-            sb.append("\"");
-        } else if (obj instanceof Collection) {
-            sb.append("[");
-
-            List<?> list;
-            
-            if (obj instanceof Set) {
-                list = new ArrayList<>((Collection<?>) obj);
-            } else {
-                list = (List<?>) obj;
-            }
-            for (int i = 0; i < ((Collection<?>) obj).size(); i++) {
-                boolean isLastIteration = (i == ((Collection<?>) obj).size() - 1);
-                sb.append(serializeField(list.get(i)));
-
-                if (!isLastIteration) {
-                    sb.append(",");
-                }
-            }
-            sb.append("]");
-            
-        } else if (obj.getClass().isArray()) {
-            sb.append("[");
-            int length = Array.getLength(obj);
-            for (int i = 0; i < length; i++) {
-                Object element = Array.get(obj, i);
-                sb.append(serializeField(element));
-                if (i != length - 1) {
-                    sb.append(",");
-                }
-            }
-            sb.append("]");
-        } else if (obj instanceof Map) {
-            sb.append("{\n");
-
-            for (int i = 0; i < ((Map<?, ?>) obj).size(); i++) {
-                boolean isLastIteration = (i == ((Map<?, ?>) obj).size() - 1);
-                sb.append("\"");
-                sb.append(((Map<?, ?>) obj).keySet().toArray()[i]);
-                sb.append("\": ");
-                sb.append(serializeField(((Map<?, ?>) obj).values().toArray()[i]));
-                if (!isLastIteration) {
-                    sb.append(",");
-                }
-            }
-
-            sb.append("\n}");
+            sb.append("\"").append(obj).append("\"");
+        } else if (obj instanceof Date) {
+            sb.append("\"").append(obj.toString()).append("\"");
         } else if (PRIMITIVE_WRAPPERS.contains(obj.getClass())) {
             sb.append(obj);
-        } else if (obj instanceof Date) {
-            sb.append("\"");
-            sb.append(((Date) obj).toString());
-            sb.append("\"");
+        } else if (obj instanceof Collection<?> collection) {
+            serializeCollection(collection, sb);
+        } else if (obj.getClass().isArray()) {
+            serializeArray(obj, sb);
+        } else if (obj instanceof Map<?, ?> map) {
+            serializeMap(map, sb);
         } else {
             sb.append(serialize(obj));
         }
 
         return sb.toString();
+    }
+
+    private static void serializeArray(Object obj, StringBuilder sb) throws IllegalArgumentException, IllegalAccessException {
+        sb.append("[");
+        int length = Array.getLength(obj);
+        for (int i = 0; i < length; i++) {
+            Object element = Array.get(obj, i);
+            sb.append(serializeField(element));
+            if (i != length - 1) {
+                sb.append(",");
+            }
+        }
+        sb.append("]");
+    }
+
+    private static void serializeMap(Map<?, ?> map, StringBuilder sb) throws IllegalArgumentException, IllegalAccessException {
+        sb.append("{\n");
+
+        for (int i = 0; i < ((Map<?, ?>) map).size(); i++) {
+            boolean isLastIteration = (i == ((Map<?, ?>) map).size() - 1);
+            sb.append("\"");
+            sb.append(((Map<?, ?>) map).keySet().toArray()[i]);
+            sb.append("\": ");
+            sb.append(serializeField(((Map<?, ?>) map).values().toArray()[i]));
+            if (!isLastIteration) {
+                sb.append(",");
+            }
+        }
+
+        sb.append("\n}");
+    }
+
+    private static void serializeCollection(Collection<?> collection, StringBuilder sb) throws IllegalArgumentException, IllegalAccessException
+    {
+        sb.append("[");
+
+        List<?> list;
+            
+        if (collection instanceof Set) {
+            list = new ArrayList<>((Collection<?>) collection);
+        } else {
+            list = (List<?>) collection;
+        }
+        for (int i = 0; i < ((Collection<?>) collection).size(); i++) {
+            boolean isLastIteration = (i == ((Collection<?>) collection).size() - 1);
+            sb.append(serializeField(list.get(i)));
+
+            if (!isLastIteration) {
+                sb.append(",");
+            }
+            }
+        sb.append("]");
     }
 }
