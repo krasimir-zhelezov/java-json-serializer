@@ -12,6 +12,7 @@ public class TestData {
     private Map<String, Integer> scores;
     private Address address;
     private User[] users;
+    
     public User[] getUsers() {
         return users;
     }

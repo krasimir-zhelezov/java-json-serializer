@@ -138,20 +138,19 @@ public class Serializer {
 
         StringBuilder sb = new StringBuilder();
 
-        if (obj instanceof String) {
-            sb.append("\"").append(obj).append("\"");
-        } else if (obj instanceof Date) {
-            sb.append("\"").append(obj.toString()).append("\"");
-        } else if (PRIMITIVE_WRAPPERS.contains(obj.getClass())) {
-            sb.append(obj);
-        } else if (obj instanceof Collection<?> collection) {
-            serializeCollection(collection, sb);
-        } else if (obj.getClass().isArray()) {
-            serializeArray(obj, sb);
-        } else if (obj instanceof Map<?, ?> map) {
-            serializeMap(map, sb);
-        } else {
-            sb.append(serialize(obj));
+        switch (obj) {
+            case String s -> sb.append("\"").append(obj).append("\"");
+            case Date d -> sb.append("\"").append(obj.toString()).append("\"");
+            case Map <?, ?> m -> serializeMap(m, sb);
+            case Collection<?> c -> serializeCollection(c, sb);
+            case Object[] a -> serializeArray(a, sb);
+            default -> {
+                if (PRIMITIVE_WRAPPERS.contains(obj.getClass())) {
+                    sb.append(obj);
+                } else {
+                    sb.append(serialize(obj));
+                }
+            }
         }
 
         return sb.toString();
