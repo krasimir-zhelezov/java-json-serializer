@@ -43,7 +43,7 @@ public class App {
 
         //System.out.println(Serializer.serialize(user));
         // Serializer.generateJsonFile("user.json", user);
-        // Serializer.generateJsonFile("data.json", data);
-        Serializer.generateJsonFile("data2.json", data2);
+        Serializer.generateJsonFile("data.json", data);
+        // Serializer.generateJsonFile("data2.json", data2);
     }
 }

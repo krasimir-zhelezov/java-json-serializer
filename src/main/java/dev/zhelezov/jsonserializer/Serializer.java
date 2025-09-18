@@ -14,6 +14,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Iterator;
 
 import dev.zhelezov.jsonserializer.annotations.JsonExclude;
 import dev.zhelezov.jsonserializer.annotations.JsonProperty;
@@ -164,11 +165,8 @@ public class Serializer {
         sb.append("[");
         int length = Array.getLength(obj);
         for (int i = 0; i < length; i++) {
-            Object element = Array.get(obj, i);
-            sb.append(serializeField(element));
-            if (i != length - 1) {
-                sb.append(",");
-            }
+            sb.append(serializeField(Array.get(obj, i)));
+            if (i < length - 1) sb.append(",");
         }
         sb.append("]");
     }
@@ -176,15 +174,12 @@ public class Serializer {
     private static void serializeMap(Map<?, ?> map, StringBuilder sb) throws IllegalArgumentException, IllegalAccessException {
         sb.append("{\n");
 
-        for (int i = 0; i < ((Map<?, ?>) map).size(); i++) {
-            boolean isLastIteration = (i == ((Map<?, ?>) map).size() - 1);
-            sb.append("\"");
-            sb.append(((Map<?, ?>) map).keySet().toArray()[i]);
-            sb.append("\": ");
-            sb.append(serializeField(((Map<?, ?>) map).values().toArray()[i]));
-            if (!isLastIteration) {
-                sb.append(",");
-            }
+        Iterator<? extends Map.Entry<?, ?>> iterator = map.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<?, ?> entry = iterator.next();
+            sb.append("\"").append(entry.getKey()).append("\": ");
+            sb.append(serializeField(entry.getValue()));
+            if (iterator.hasNext()) sb.append(",");
         }
 
         sb.append("\n}");
@@ -194,21 +189,12 @@ public class Serializer {
     {
         sb.append("[");
 
-        List<?> list;
-            
-        if (collection instanceof Set) {
-            list = new ArrayList<>((Collection<?>) collection);
-        } else {
-            list = (List<?>) collection;
-        }
-        for (int i = 0; i < ((Collection<?>) collection).size(); i++) {
-            boolean isLastIteration = (i == ((Collection<?>) collection).size() - 1);
-            sb.append(serializeField(list.get(i)));
+        Iterator<?> iterator = collection.iterator();
 
-            if (!isLastIteration) {
-                sb.append(",");
-            }
-            }
+        while (iterator.hasNext()) {
+            sb.append(serializeField(iterator.next()));
+            if (iterator.hasNext()) sb.append(",");
+        }
         sb.append("]");
     }
 }
