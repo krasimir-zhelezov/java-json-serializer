@@ -126,15 +126,17 @@ public class Serializer {
      * @throws IllegalAccessException   If the object has fields that are not accessible.
      */
     private static String serializeField(Object obj) throws IllegalArgumentException, IllegalAccessException {
-        if (visitedObjects.contains(obj)) {
-            throw new CircularReferenceException();
-        }
-
         if (obj == null) {
-            return null;
+            return "null";
+        }
+        if (!PRIMITIVE_WRAPPERS.contains(obj.getClass()) && !(obj instanceof String)) {
+            if (visitedObjects.contains(obj)) {
+                throw new CircularReferenceException();
+            }
+            visitedObjects.add(obj);
         }
 
-        visitedObjects.add(obj);
+        
 
         StringBuilder sb = new StringBuilder();
 
@@ -152,6 +154,8 @@ public class Serializer {
                 }
             }
         }
+
+        visitedObjects.remove(obj);
 
         return sb.toString();
     }
