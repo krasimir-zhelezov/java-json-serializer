@@ -3,8 +3,8 @@ package dev.zhelezov.jsonserializer.test;
 import java.util.Date;
 import java.util.List;
 
-import dev.zhelezov.jsonserializer.main.annotations.JsonExclude;
-import dev.zhelezov.jsonserializer.main.annotations.JsonProperty;
+import dev.zhelezov.jsonserializer.annotations.JsonExclude;
+import dev.zhelezov.jsonserializer.annotations.JsonProperty;
 
 public class User {
     @JsonProperty("UserName") private String username;

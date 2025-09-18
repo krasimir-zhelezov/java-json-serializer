@@ -1,4 +1,4 @@
-package dev.zhelezov.jsonserializer.main.annotations;
+package dev.zhelezov.jsonserializer.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

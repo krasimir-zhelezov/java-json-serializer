@@ -1,4 +1,4 @@
-package dev.zhelezov.jsonserializer.main;
+package dev.zhelezov.jsonserializer;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import dev.zhelezov.jsonserializer.main.annotations.JsonExclude;
-import dev.zhelezov.jsonserializer.main.annotations.JsonProperty;
+import dev.zhelezov.jsonserializer.annotations.JsonExclude;
+import dev.zhelezov.jsonserializer.annotations.JsonProperty;
 
 /**
  * Custom Java JSON serializer.
