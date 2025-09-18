@@ -72,47 +72,32 @@ public class Serializer {
 
         sb.append("{\n");
 
-        Field fieldArray[] = cls.getDeclaredFields();
-        ArrayList<Field> fieldList = new ArrayList<Field>();
+        Field[] fields = cls.getDeclaredFields();
+        boolean firstField = true;
 
-        for (int i = 0; i < fieldArray.length; i++) {
-            if (Modifier.isTransient(fieldArray[i].getModifiers()) || Modifier.isFinal(fieldArray[i].getModifiers()) || fieldArray[i].isAnnotationPresent(JsonExclude.class)) {
+        for (Field field : fields) {
+            int modifiers = field.getModifiers();
+
+            if (Modifier.isTransient(modifiers) || Modifier.isFinal(modifiers) || field.isAnnotationPresent(JsonExclude.class)) {
                 continue;
             }
 
-            fieldList.add(fieldArray[i]);
-        }
-
-        for (int i = 0; i < fieldList.size(); i++) {
-            boolean isLastIteration = (i == fieldList.size() - 1);
-
-            Field field = fieldList.get(i);
-
-            if (Modifier.isTransient(field.getModifiers()) || Modifier.isFinal(field.getModifiers())) {
-                continue;
+            if (!firstField) {
+                sb.append(",\n");
+            } else {
+                firstField = false;
             }
 
             field.setAccessible(true);
+            String fieldName = field.isAnnotationPresent(JsonProperty.class) ? field.getAnnotation(JsonProperty.class).value() : field.getName();
 
-            sb.append("\"");
-            sb.append(field.isAnnotationPresent(JsonProperty.class) ? field.getAnnotation(JsonProperty.class).value() : field.getName());
-            sb.append("\": ");
+            sb.append("\"").append(fieldName).append("\": ");
 
             Object fieldValue = field.get(obj);
-
-            System.out.println("Serializing field \"" + field.getName() + "\"=" + fieldValue);
             sb.append(serializeField(fieldValue));
-
-            if (!isLastIteration) {
-                sb.append(",");
-            }
-
-            sb.append("\n");
-
-            field.setAccessible(false);
         }
 
-        sb.append("}");
+        sb.append("\n}");
 
         return sb.toString();
     }

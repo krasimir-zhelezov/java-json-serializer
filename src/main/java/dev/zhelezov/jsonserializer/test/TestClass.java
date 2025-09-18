@@ -50,7 +50,6 @@ public class TestClass {
     public static class Employee {
         private String employeeId;
         private String fullName;
-        private Department department;
         private Set<String> skills;
 
         // Constructor, getters, setters would go here
@@ -141,13 +140,11 @@ public class TestClass {
         dept1.name = "Development";
         dept1.manager = emp1;  // Circular reference
         
-        emp1.department = dept1;
         
         Employee emp2 = new Employee();
         emp2.employeeId = "E200";
         emp2.fullName = "Jane Smith";
         emp2.skills = new HashSet<>(Arrays.asList("JavaScript", "React"));
-        emp2.department = dept1;
         
         this.teamMembers = new HashMap<>();
         teamMembers.put("lead", emp1);
