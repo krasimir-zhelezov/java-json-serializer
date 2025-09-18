@@ -42,7 +42,7 @@ public class Serializer {
     public static void generateJsonFile(String filePath, Object obj) throws IllegalArgumentException, IllegalAccessException {
         String json = serialize(obj);
 
-        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filePath))) {
+        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("output/" + filePath))) {
             writer.write(json);
             writer.newLine();
         } catch (IOException e) {
@@ -95,6 +95,7 @@ public class Serializer {
 
             Object fieldValue = field.get(obj);
 
+            System.out.println("Serializing field \"" + field.getName() + "\"=" + fieldValue);
             sb.append(serializeField(fieldValue));
 
             if (!isLastIteration) {
