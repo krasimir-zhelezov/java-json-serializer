@@ -20,6 +20,6 @@ This is a lightweight Java JSON serializer library that allows you to convert Ja
 * ~~Exclude fields from serialization~~
 
 ## Installation
-1. Download .jar from latest release
+1. Download .jar from [latest release](https://github.com/krasimir-zhelezov/java-json-serializer/releases/latest)
 2. Add the jar into external libraries
 3. Use
