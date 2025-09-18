@@ -10,12 +10,14 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import dev.zhelezov.jsonserializer.annotations.JsonExclude;
 import dev.zhelezov.jsonserializer.annotations.JsonProperty;
+import dev.zhelezov.jsonserializer.exceptions.CircularReferenceException;
 
 /**
  * Custom Java JSON serializer.
@@ -30,6 +32,8 @@ public class Serializer {
         Integer.class, Long.class, Double.class, Float.class,
         Boolean.class, Character.class, Byte.class, Short.class, Void.class
     );
+
+    private static Set<Object> visitedObjects = new HashSet<Object>();
 
     /**
      * Generate a JSON file in the specified path with the serialized object.
@@ -122,9 +126,14 @@ public class Serializer {
      * @throws IllegalAccessException   If the object has fields that are not accessible.
      */
     private static String serializeField(Object obj) throws IllegalArgumentException, IllegalAccessException {
+        if (visitedObjects.contains(obj)) {
+            throw new CircularReferenceException();
+        }
         if (obj == null) {
             return null;
         }
+
+        visitedObjects.add(obj);
 
         StringBuilder sb = new StringBuilder();
 
