@@ -5,6 +5,7 @@ This is a lightweight Java JSON serializer library that allows you to convert Ja
 * Annotations
 * Convert Java objects to JSON strings
 * Handling of null values
+* Handling of circular references
 * Support for Java collections (List, Map, Set)
 * Save to .json
 
