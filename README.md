@@ -10,7 +10,6 @@ This is a lightweight Java JSON serializer library that allows you to convert Ja
 * Save to .json
 
 ## Planned Features
-* FIX SPAGHETTI CODE
 * ~~Support for Set~~
 * ~~Annotations~~
 * ~~Circular Reference handler~~
