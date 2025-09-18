@@ -131,10 +131,11 @@ public class Serializer {
             case Date d -> sb.append("\"").append(obj.toString()).append("\"");
             case Map <?, ?> m -> serializeMap(m, sb);
             case Collection<?> c -> serializeCollection(c, sb);
-            case Object[] a -> serializeArray(a, sb);
             default -> {
                 if (PRIMITIVE_WRAPPERS.contains(obj.getClass())) {
                     sb.append(obj);
+                } else if (obj.getClass().isArray()) {
+                    serializeArray(obj, sb);
                 } else {
                     sb.append(serialize(obj));
                 }

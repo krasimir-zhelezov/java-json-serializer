@@ -12,7 +12,7 @@ public class TestData {
     private Map<String, Integer> scores;
     private Address address;
     private User[] users;
-    
+
     public User[] getUsers() {
         return users;
     }
@@ -87,14 +87,13 @@ public class TestData {
     
     @Override
     public String toString() {
-        return "TestData{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", isActive=" + isActive +
-                ", salary=" + salary +
-                ", hobbies=" + hobbies +
-                // ", scores=" + scores +
-                ", address=" + address +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        
+        for (int i = 0; i < binaryData.length; i++)
+        {
+            sb.append(binaryData[i]);
+        }
+
+        return sb.toString();
     }
 }
